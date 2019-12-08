@@ -1,0 +1,26 @@
+CREATE OR REPLACE TRIGGER IS_VET_TRIG
+AFTER INSERT ON STAFF
+FOR EACH ROW
+
+DECLARE 
+PRAGMA AUTONOMOUS_TRANSACTION;
+lv_vetid int; 
+lv_flag char;
+
+BEGIN
+
+SELECT MAX(StaffID)
+INTO lv_vetid
+FROM STAFF; 
+
+SELECT IS_VET
+INTO lv_flag
+FROM STAFF
+WHERE staffid = lv_vetid;
+
+
+  IF lv_flag = 1 OR lv_flag = 'y' OR lv_flag = 'Y'
+  THEN INSERT INTO VETERINARIAN(VETID) VALUES(lv_vetid);
+  END IF;
+COMMIT;
+END;

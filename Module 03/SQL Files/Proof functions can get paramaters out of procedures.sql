@@ -1,0 +1,19 @@
+
+CREATE OR REPLACE PROCEDURE PROC_TESTOUT (p_in INT, p_out OUT INT)
+AS
+BEGIN 
+	p_out := p_in * 5;
+END
+
+
+
+CREATE OR REPLACE FUNCTION FUNC_PROCTEST (f_in INT)
+RETURN INT
+AS
+	lv_turds int := null;
+
+BEGIN
+	PROC_TESTOUT(f_in, lv_turds);
+
+RETURN lv_turds;
+END

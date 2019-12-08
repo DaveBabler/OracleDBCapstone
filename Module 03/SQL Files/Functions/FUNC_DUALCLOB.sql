@@ -1,0 +1,10 @@
+CREATE OR REPLACE FUNCTION FUNC_DUALCLOB (f_value IN varchar2)
+RETURN CLOB
+AS
+lv_valueout CLOB;
+BEGIN
+SELECT f_value
+INTO lv_valueout
+FROM DUAL;
+RETURN lv_valueout;
+END;
